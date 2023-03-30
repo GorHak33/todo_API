@@ -1,31 +1,34 @@
-const express = require('express'),
-  validator = require('../middlewares/validator.middleware'),
-  auth = require('../middlewares/auth.middleware'),
+const express = require("express"),
+  validator = require("../middlewares/validator.middleware"),
+  auth = require("../middlewares/auth.middleware"),
   taskRouter = express.Router(),
-  taskController = require('../controllers/task.controller');
-  
+  taskController = require("../controllers/task.controller");
+
 /**
  * Аll routes start with '/task'
  **/
 
 // create task
-taskRouter.post('/', auth, validator('task-create'), taskController.create);
+taskRouter.post("/", auth, validator("task-create"), taskController.create);
 
 // get one task
-taskRouter.get('/:id', auth, taskController.getSingle);
+taskRouter.get("/:id", auth, taskController.getSingle);
 
 // get batch tasks
-taskRouter.get('/', auth, taskController.getBatch);
+taskRouter.get("/", auth, taskController.getBatch);
 
 // update task
-taskRouter.put('/:id', auth, validator('task-update'), taskController.update);
+taskRouter.put("/:id", auth, validator("task-update"), taskController.update);
 
 // delete batch tasks
-taskRouter.patch('/', auth, validator('task-delete-batch'), taskController.deleteBatch);
+taskRouter.patch(
+  "/",
+  auth,
+  validator("task-delete-batch"),
+  taskController.deleteBatch
+);
 
 // delete single task
-taskRouter.delete('/:id', auth, taskController.delete);
-
-
+taskRouter.delete("/:id", auth, taskController.delete);
 
 module.exports = taskRouter;
