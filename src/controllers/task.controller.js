@@ -21,7 +21,7 @@ class TaskController {
     try {
       const task = await taskSchema.findOne({
         _id: req.params.id,
-        // owner: res.locals.userId,
+        owner: res.locals.userId,
       });
       if (!task) throw errorConfig.taskNotFound;
       res.json(task.toObject());
@@ -55,7 +55,7 @@ class TaskController {
     try {
       const task = await taskSchema.findOneAndDelete({
         _id: req.params.id,
-        // owner: res.locals.userId,
+        owner: res.locals.userId,
       });
 
       if (!task) throw errorConfig.taskNotFound;
