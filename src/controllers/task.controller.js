@@ -6,13 +6,16 @@ class TaskController {
   create = async (req, res, next) => {
     try {
       const taskData = {
-        // owner: ObjectId(res.locals.userId),
+        owner: ObjectId(res.locals.userId),
         ...req.body,
       };
+      console.log(taskData, "taskData");
 
       const task = await taskSchema.create(taskData);
       res.json(task);
     } catch (err) {
+      console.log(err, "errrr");
+
       next(err);
     }
   };
@@ -34,7 +37,7 @@ class TaskController {
     try {
       const task = await taskSchema.findOne({
         _id: req.params.id,
-        // owner: res.locals.userId
+        owner: res.locals.userId,
       });
       if (!task) throw errorConfig.taskNotFound;
 
@@ -81,11 +84,12 @@ class TaskController {
 
   getBatch = async (req, res, next) => {
     try {
-      // const {userId} = res.locals,
-      //         {query} = req;
+      const { userId } = res.locals;
+
       const { query } = req;
+
       const dbQuery = {
-        // owner: userId,
+        owner: userId,
       };
 
       const { status } = query;
