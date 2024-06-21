@@ -11,7 +11,7 @@ const express = require("express"),
 // create task
 taskRouter.post("/", auth, validator("task-create"), taskController.create);
 
-// get one task
+// get one taskkkk
 taskRouter.get("/:id", auth, taskController.getSingle);
 
 // get batch tasks
